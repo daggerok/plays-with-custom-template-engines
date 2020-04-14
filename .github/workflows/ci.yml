@@ -28,7 +28,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: basic plain html (no template engine) java-${{ matrix.java }}
+    name: basic plain html (no template) java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -52,7 +52,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: atlassian commonmark markdown template engine java-${{ matrix.java }}
+    name: atlassian commonmark template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -76,7 +76,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: flexmark-java markdown template engine java-${{ matrix.java }}
+    name: flexmark-java template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -100,7 +100,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: txtmark markdown template engine java-${{ matrix.java }}
+    name: txtmark template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -124,7 +124,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: pegdown markdown template engine java-${{ matrix.java }}
+    name: pegdown template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -148,7 +148,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: pegdown markdown template engine java-${{ matrix.java }}
+    name: markdownpapers template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
@@ -172,7 +172,7 @@ jobs:
         java: [11,14]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    name: pegdown markdown template engine java-${{ matrix.java }}
+    name: markdownj template java-${{ matrix.java }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-java@v1
