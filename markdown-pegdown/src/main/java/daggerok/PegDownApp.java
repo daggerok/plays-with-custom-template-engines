@@ -1,10 +1,12 @@
 package daggerok;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.parboiled.Parboiled;
+import org.pegdown.Extensions;
+import org.pegdown.Parser;
+import org.pegdown.PegDownProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -41,17 +43,17 @@ class MarkdownConfig {
 
   @Bean
   Parser parser() {
-    return Parser.builder().build();
+    return Parboiled.createParser(Parser.class, Extensions.NONE);
   }
 
   @Bean
-  HtmlRenderer htmlRenderer() {
-    return HtmlRenderer.builder().build();
+  PegDownProcessor pegDownProcessor(Parser parser) {
+    return new PegDownProcessor(parser);
   }
 
   @Bean
-  MarkdownToHtmlConverter markdownToHtml(Parser parser, HtmlRenderer htmlRenderer) {
-    return md -> htmlRenderer.render(parser.parse(md));
+  MarkdownToHtmlConverter markdownToHtml(PegDownProcessor pegDownProcessor) {
+    return pegDownProcessor::markdownToHtml;
   }
 
   @Bean
@@ -74,7 +76,7 @@ class MarkdownConfig {
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class FlexMarkApp {
+public class PegDownApp {
 
   private final MarkdownRenderer markdownRenderer;
 
@@ -105,6 +107,6 @@ public class FlexMarkApp {
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(FlexMarkApp.class, args);
+    SpringApplication.run(PegDownApp.class, args);
   }
 }

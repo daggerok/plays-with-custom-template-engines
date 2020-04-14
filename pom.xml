@@ -12,6 +12,7 @@
     <module>markdown-commonmark</module>
     <module>markdown-flexmark-java</module>
     <module>markdown-txtmark</module>
+    <module>markdown-pegdown</module>
   </modules>
   <properties>
     <java.version>11</java.version>

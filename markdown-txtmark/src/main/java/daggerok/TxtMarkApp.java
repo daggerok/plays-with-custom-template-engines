@@ -36,7 +36,7 @@ interface MarkdownRenderer {
 }
 
 @Configuration
-class CommonMarkConfig {
+class MarkdownConfig {
 
   @Bean
   MarkdownToHtmlConverter markdownToHtml() {
