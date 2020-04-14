@@ -14,6 +14,7 @@
     <module>markdown-txtmark</module>
     <module>markdown-pegdown</module>
     <module>markdown-markdownpapers</module>
+    <module>markdown-markdownj</module>
   </modules>
   <properties>
     <java.version>11</java.version>

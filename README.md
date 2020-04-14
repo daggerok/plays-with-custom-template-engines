@@ -50,8 +50,25 @@ http :8080/api
 http :8080
 ```
 
+## markdown-markdownpapers
+
+```bash
+./mvnw clean ; ./mvnw -f markdown-markdownpapers ; bash ./markdown-markdownpapers/target/*jar &
+http :8080/api
+http :8080
+```
+
+## markdown-markdownj
+
+```bash
+./mvnw clean ; ./mvnw -f markdown-markdownj ; bash ./markdown-markdownj/target/*jar &
+http :8080/api
+http :8080
+```
+
 ## resources
 
+* https://github.com/myabc/markdownj
 * https://github.com/lruiz/MarkdownPapers
 * https://www.programcreek.com/java-api-examples/?api=org.tautua.markdownpapers.Markdown
 * https://github.com/sirthias/pegdown
