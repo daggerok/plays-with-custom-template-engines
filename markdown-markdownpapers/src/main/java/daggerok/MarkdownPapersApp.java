@@ -2,11 +2,9 @@ package daggerok;
 
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.output.StringBuilderWriter;
 import org.jetbrains.annotations.NotNull;
-import org.parboiled.Parboiled;
-import org.pegdown.Extensions;
-import org.pegdown.Parser;
-import org.pegdown.PegDownProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,10 +16,12 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import org.tautua.markdownpapers.Markdown;
 import reactor.core.publisher.Mono;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,17 +38,25 @@ interface MarkdownRenderer {
   String render(String markdownLocation);
 }
 
+@Log4j2
 @Configuration
 class MarkdownConfig {
 
   @Bean
-  PegDownProcessor pegDownProcessor() {
-    return new PegDownProcessor();
+  Markdown markdown() {
+    return new Markdown();
   }
 
   @Bean
-  MarkdownToHtmlConverter markdownToHtml(PegDownProcessor pegDownProcessor) {
-    return pegDownProcessor::markdownToHtml;
+  MarkdownToHtmlConverter markdownToHtml(Markdown markdown) {
+    return md -> {
+      try (var reader = new StringReader(md);
+           var writer = new StringBuilderWriter()) {
+        Try.run(() -> markdown.transform(reader, writer))
+           .onFailure(log::error);
+        return writer.toString();
+      }
+    };
   }
 
   @Bean
@@ -71,7 +79,7 @@ class MarkdownConfig {
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class PegDownApp {
+public class MarkdownPapersApp {
 
   private final MarkdownRenderer markdownRenderer;
 
@@ -91,7 +99,7 @@ public class PegDownApp {
     var response = Map.of("_self", uri,
                           "index GET", baseUrl + "/");
     return ServerResponse.ok()
-                         .bodyValue(Mono.just(response));
+                         .bodyValue(response);
   }
 
   @NotNull
@@ -102,6 +110,6 @@ public class PegDownApp {
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(PegDownApp.class, args);
+    SpringApplication.run(MarkdownPapersApp.class, args);
   }
 }

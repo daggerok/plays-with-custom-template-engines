@@ -13,6 +13,7 @@
     <module>markdown-flexmark-java</module>
     <module>markdown-txtmark</module>
     <module>markdown-pegdown</module>
+    <module>markdown-markdownpapers</module>
   </modules>
   <properties>
     <java.version>11</java.version>
