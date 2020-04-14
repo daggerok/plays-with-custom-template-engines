@@ -28,5 +28,7 @@ http :8080
 
 
 ## resources
+
+* https://github.com/rjeschke/txtmark
 * https://github.com/vsch/flexmark-java
 * https://github.com/atlassian/commonmark-java

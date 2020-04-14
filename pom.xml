@@ -11,6 +11,7 @@
     <module>basic-plain-html</module>
     <module>markdown-commonmark</module>
     <module>markdown-flexmark-java</module>
+    <module>markdown-txtmark</module>
   </modules>
   <properties>
     <java.version>11</java.version>
