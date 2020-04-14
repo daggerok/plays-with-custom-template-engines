@@ -41,14 +41,14 @@ interface MarkdownRenderer {
 @Configuration
 class MarkdownConfig {
 
-  @Bean
+  // @Bean
   Parser parser() {
     return Parboiled.createParser(Parser.class, Extensions.NONE);
   }
 
   @Bean
-  PegDownProcessor pegDownProcessor(Parser parser) {
-    return new PegDownProcessor(parser);
+  PegDownProcessor pegDownProcessor() {
+    return new PegDownProcessor();
   }
 
   @Bean
@@ -96,7 +96,7 @@ public class PegDownApp {
     var response = Map.of("_self", uri,
                           "index GET", baseUrl + "/");
     return ServerResponse.ok()
-                         .body(Mono.just(response), Map.class);
+                         .bodyValue(Mono.just(response));
   }
 
   @NotNull
