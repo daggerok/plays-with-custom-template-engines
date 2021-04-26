@@ -12,7 +12,7 @@
   <packaging>jar</packaging>
   <properties>
     <vavr.version>0.10.2</vavr.version>
-    <commons-io.version>2.6</commons-io.version>
+    <commons-io.version>2.7</commons-io.version>
     <markdownpapers.version>1.4.4</markdownpapers.version>
   </properties>
   <dependencies>
